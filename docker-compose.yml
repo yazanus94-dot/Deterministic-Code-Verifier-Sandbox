@@ -1,0 +1,32 @@
+services:
+  verifier:
+    build: .
+    image: verifier-sandbox:1.0.0
+    container_name: verifier-sandbox
+    # The verifier itself runs OUTSIDE docker-in-docker: grading uses the
+    # subprocess backend inside this container (deterministic, same wire
+    # protocol). Container-execution of untrusted code targets the host
+    # daemon via the socket mount below when SANDBOX=docker.
+    environment:
+      - SANDBOX=${SANDBOX:-auto}
+    command: ["python", "-m", "verifier_sandbox.cli", "demo"]
+
+  tests:
+    build: .
+    image: verifier-sandbox:1.0.0
+    container_name: verifier-sandbox-tests
+    # Unit + property suites only: the sandbox subprocess tests spawn nested
+    # pytest runs whose parallel coverage data cannot combine with the outer
+    # branch-coverage session (container-only artifact; full suite incl.
+    # coverage runs in CI and on the host).
+    command: >
+      python -m pytest tests/unit tests/property -v
+    profiles: ["tests"]
+
+  benchmark:
+    build: .
+    image: verifier-sandbox:1.0.0
+    container_name: verifier-sandbox-benchmark
+    working_dir: /app
+    command: ["python", "benchmarks/benchmark.py"]
+    profiles: ["benchmark"]
