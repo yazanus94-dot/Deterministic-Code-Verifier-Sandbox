@@ -2,11 +2,12 @@
 
 **A professional Python engineering project demonstrating environment reproducibility, deterministic verifiers, and secure untrusted-code execution.**
 
+[![License](https://img.shields.io/github/license/yazanus94-dot/Deterministic-Code-Verifier-Sandbox?color=yellow)](LICENSE)
+[![Built with OpenCode](https://img.shields.io/badge/Built%20with-OpenCode-6E40C9?logo=opencode&logoColor=white)](https://opencode.ai)
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Docker](https://img.shields.io/badge/Docker-Supported-blue)
 ![Testing](https://img.shields.io/badge/Tests-Pytest%20%2B%20Hypothesis-green)
 ![Coverage](https://img.shields.io/badge/Coverage-branch%20enabled-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 1. Project Overview
 
